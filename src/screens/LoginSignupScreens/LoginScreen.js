@@ -43,7 +43,7 @@ const LoginScreen = ({ navigation }) => {
                         setShowPassword(!showPassword)}
                 />
             </View>
-            <TouchableOpacity style={btn1}>
+            <TouchableOpacity style={btn1} onPress={() => navigation.navigate('homepage')}>
                 <Text style={{ color: colors.col1, fontSize: titles.btntxt, fontWeight: "bold" }}>Sign In</Text>
             </TouchableOpacity>
 

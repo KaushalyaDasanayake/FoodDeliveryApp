@@ -5,6 +5,7 @@ module.exports = {
         col2: '#fff',
         text1: 'red',
         text2: 'grey',
+        text3: 'black',
     },
     //fonts
     titles: {

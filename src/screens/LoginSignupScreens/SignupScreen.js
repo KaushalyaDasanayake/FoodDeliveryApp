@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { hr80, btn1, titles, colors } from '../../globals/style';
 import { AntDesign, FontAwesome, FontAwesome5, Feather, Fontisto } from '@expo/vector-icons';
 import { Octicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import logo from '../../../assets/logo1.png';
 
 const SignupScreen = ({ navigation }) => {
     const [emailfocus, setEmailfocus] = useState(false);
     const [namefocus, setNamefocus] = useState(false);
-    const [passwordfocus, setPasswordfocus] = useState(false);
     const [contactfocus, setcontatctfocus] = useState(false);
+    const [passwordfocus, setPasswordfocus] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [showcPassword, setcShowPassword] = useState(false);
     const [cpasswordfocus, setcPasswordfocus] = useState(false);
