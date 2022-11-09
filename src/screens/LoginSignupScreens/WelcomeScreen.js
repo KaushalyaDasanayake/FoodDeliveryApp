@@ -1,10 +1,46 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { colors, hr80 } from '../../globals/style';
 import logo from '../../../assets/logo1.png'
 
+import { firebase } from '../../../Firebase/FirebaseConfig';
+
 
 const WelcomeScreen = ({ navigation }) => {
+    const [userlogged, setUserlogged] = useState(null);
+
+    //App Load (User logging)
+    useEffect(() => {
+        const checklogin = () => {
+            firebase.auth().onAuthStateChanged((user) => {
+                // console.log(user);
+                if (user) {
+                    // navigation.navigate('home');
+                    // console.log(user);
+                    setUserlogged(user);
+                } else {
+                    // No user is signed in.
+                    setUserlogged(false);
+                    console.log('no user');
+                }
+            });
+        }
+        checklogin();
+    }, [])
+
+    console.log(userlogged);
+    //Signout in app
+    const handlelogout = () => {
+        firebase.auth().signOut().then(() => {
+            // Sign-out successful.
+            setUserlogged(null);
+            console.log('User signed out');
+        }).catch((error) => {
+            // An error happened.
+            console.log(error);
+        });
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Welcome to Foodie</Text>
@@ -15,19 +51,39 @@ const WelcomeScreen = ({ navigation }) => {
             {/* <Text style={styles.text}>Find the best food around you at lowest price.</Text>
             <View style={hr80} /> */}
 
-            <View style={styles.btnout}>
-                <TouchableOpacity onPress={() => navigation.navigate('signuppage')}>
-                    <Text style={styles.btn}>
-                        Sign up
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('loginpage')}>
-                    <Text style={styles.btn}>
-                        Sign In
-                    </Text>
-                </TouchableOpacity>
-            </View>
-        </View>
+            {userlogged == null ?
+                <View style={styles.btnout}>
+                    <TouchableOpacity onPress={() => navigation.navigate('signuppage')}>
+                        <Text style={styles.btn}>
+                            Sign up
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('loginpage')}>
+                        <Text style={styles.btn}>
+                            Sign In
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+                :
+                <View style={styles.logged}>
+                    {/* Display Logging user */}
+                    <Text style={styles.txtlog}>Signed in as <Text style={styles.txtlogin}>{userlogged.email}</Text></Text>
+
+                    <View style={styles.btnout}>
+                        <TouchableOpacity onPress={() => navigation.navigate('homepage')}>
+                            <Text style={styles.btn}>
+                                Go to Home
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => handlelogout}>
+                            <Text style={styles.btn}>
+                                Log Out
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            }
+        </View >
     )
 }
 
@@ -77,6 +133,21 @@ const styles = StyleSheet.create({
         padding: 10,
         paddingHorizontal: 20,
     },
+    logged: {
+        alignItems: 'center',
+
+    },
+    txtlog: {
+        fontSize: 16,
+        color: colors.col1,
+    },
+    txtlogin: {
+        fontSize: 16,
+        color: colors.col1,
+        fontWeight: '700',
+        textDecorationStyle: 'solid',
+        textDecorationLine: 'underline',
+    }
 
 })
 export default WelcomeScreen

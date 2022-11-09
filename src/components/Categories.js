@@ -6,31 +6,31 @@ import { colors } from '../globals/style'
 const Categories = () => {
     return (
         <View style={styles.container}>
-            <Text style={styles.head}>Categories</Text>
+            {/* <Text style={styles.head}>Categories</Text> */}
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 <View style={styles.box}>
                     <FontAwesome5 name="hamburger" size={24} color="black" style={styles.icon} />
-                    <Text style={styles.text}>Burger</Text>
+                    <Text style={styles.text}>Breakfast</Text>
                 </View>
                 <View style={styles.box}>
                     <FontAwesome5 name="pizza-slice" size={24} color="black" style={styles.icon} />
-                    <Text style={styles.text}>Pizza</Text>
+                    <Text style={styles.text}>Lunch</Text>
                 </View>
                 <View style={styles.box}>
                     <MaterialCommunityIcons name="pasta" size={24} color="black" style={styles.icon} />
-                    <Text style={styles.text}>Pasta & Noodles</Text>
+                    <Text style={styles.text}>Dinner</Text>
                 </View>
                 <View style={styles.box}>
                     <MaterialCommunityIcons name="cupcake" size={24} color="black" style={styles.icon} />
-                    <Text style={styles.text}>Dessert & Candy</Text>
+                    <Text style={styles.text}>Candy</Text>
                 </View>
                 <View style={styles.box}>
-                    <FontAwesome5 name="birthday-cake" size={24} color="black" style={styles.icon} />
-                    <Text style={styles.text}>Cakes</Text>
+                    <MaterialCommunityIcons name="food-apple-outline" size={24} color="black" style={styles.icon} />
+                    <Text style={styles.text}>ShortEats</Text>
                 </View>
                 <View style={styles.box}>
                     <MaterialCommunityIcons name="food-fork-drink" size={24} color="black" style={styles.icon} />
-                    <Text style={styles.text}>Drinks & Beverage</Text>
+                    <Text style={styles.text}>Starters</Text>
                 </View>
             </ScrollView>
         </View>
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: colors.col2,
         //alignItems: 'center',
-        width: '90%',
+        width: '100%',
         elevation: 10,
         borderRadius: 10,
     },

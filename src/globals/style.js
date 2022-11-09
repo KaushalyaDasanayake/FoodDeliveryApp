@@ -24,6 +24,7 @@ module.exports = {
         elevation: 10,
         color: 'white',
         marginTop: 10,
+        marginBottom: 10,
     },
     //btn2
     btn2: {
@@ -35,5 +36,17 @@ module.exports = {
         borderBottomColor: '#FF9677',
         borderBottomWidth: 1,
         marginVertical: 20,
+    },
+    veg: {
+        backgroundColor: 'green',
+        width: 20,
+        height: 20,
+        borderRadius: 5,
+    },
+    nonveg: {
+        backgroundColor: 'red',
+        width: 20,
+        height: 20,
+        borderRadius: 5,
     }
 }
