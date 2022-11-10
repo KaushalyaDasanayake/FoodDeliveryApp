@@ -1,10 +1,15 @@
-import { FlatList, Image, StyleSheet, Text, View } from 'react-native'
+import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { colors, veg, nonveg } from '../globals/style'
 
-const Cardslider = ({ title, data }) => {
+const Cardslider = ({ title, data, navigation }) => {
     //console.log(title)
     //console.log(data)
+
+    const openProductPage = (item) => {
+        //console.log(item)
+        navigation.navigate('productview', item)
+    }
     return (
         <View style={styles.container}>
             <Text style={styles.cardsouthead}>
@@ -15,26 +20,33 @@ const Cardslider = ({ title, data }) => {
                 showsHorizontalScrollIndicator={false}
                 data={data}
                 renderItem={({ item }) => (
-                    <View style={styles.card}>
-                        <View style={styles.one}>
-                            <Image source={{
-                                uri: item.foodImageUrl
-                            }} style={styles.cardimg} />
-                        </View>
-                        <View style={styles.two}>
-                            <Text style={styles.text1}>{item.foodName}</Text>
-                            <View style={styles.s2in}>
-                                <Text style={styles.text2}>Rs.{item.foodPrice}/=</Text>
+                    <TouchableOpacity
+                        key={item.index}
+                        onPress={() => {
+                            openProductPage(item)
+                        }}
+                    >
+                        <View style={styles.card}>
+                            <View style={styles.one}>
+                                <Image source={{
+                                    uri: item.foodImageUrl
+                                }} style={styles.cardimg} />
+                            </View>
+                            <View style={styles.two}>
+                                <Text style={styles.text1}>{item.foodName}</Text>
+                                <View style={styles.s2in}>
+                                    <Text style={styles.text2}>Rs.{item.foodPrice}/=</Text>
 
-                                {/* veg & non-veg */}
-                                {item.foodType == 'veg' ? <Text style={veg}></Text> : <Text style={nonveg}></Text>}
+                                    {/* veg & non-veg */}
+                                    {item.foodType == 'veg' ? <Text style={veg}></Text> : <Text style={nonveg}></Text>}
 
+                                </View>
+                            </View>
+                            <View style={styles.three}>
+                                <Text style={styles.buybtn}>Buy</Text>
                             </View>
                         </View>
-                        <View style={styles.three}>
-                            <Text style={styles.buybtn}>Buy</Text>
-                        </View>
-                    </View>
+                    </TouchableOpacity>
                 )}
             />
         </View>

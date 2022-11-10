@@ -28,14 +28,6 @@ const SignupScreen = ({ navigation }) => {
     const [successmsg, setSuccessmsg] = useState(null);
 
     const handleSignup = () => {
-        const FormData = {
-            email: email,
-            password: password,
-            //cpassword: cpassword,
-            phone: phone,
-            name: name,
-            address: address
-        }
         if (password != cpassword) {
             //alert("Password doesn't match");
             setCustomError("Password doesn't match");
@@ -48,17 +40,29 @@ const SignupScreen = ({ navigation }) => {
         //User creation
         try {
             firebase.auth().createUserWithEmailAndPassword(email, password)
-                .then(() => {
+                .then((userCredentials) => {
+                    //console.log(userCredentials?.user.uid);
                     console.log("User created")
                     //setSuccessmsg("User created successfully")
-                    const userRef = firebase.firestore().collection('UserData')
-
-                    userRef.add(FormData).then(() => {
-                        console.log('data added to firestore')
-                        setSuccessmsg("User added successfully")
-                    }).catch((error) => {
-                        console.log('firestore error ', error)
-                    })
+                    // const userRef = firebase.firestore().collection('UserData')
+                    if (userCredentials?.user.uid) {
+                        const userRef = firebase.firestore().collection('UserData')
+                        userRef.add({
+                            email: email,
+                            password: password,
+                            //cpassword: cpassword,
+                            phone: phone,
+                            name: name,
+                            address: address,
+                            uid: userCredentials?.user.uid
+                        })
+                            .then(() => {
+                                console.log('data added to firestore')
+                                setSuccessmsg("User added successfully")
+                            }).catch((error) => {
+                                console.log('firestore error ', error)
+                            })
+                    }
                 })
                 //Email address already exists
                 .catch((error) => {

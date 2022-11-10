@@ -20,7 +20,7 @@ const WelcomeScreen = ({ navigation }) => {
                     setUserlogged(user);
                 } else {
                     // No user is signed in.
-                    setUserlogged(false);
+                    //setUserlogged(false);
                     console.log('no user');
                 }
             });
@@ -75,7 +75,7 @@ const WelcomeScreen = ({ navigation }) => {
                                 Go to Home
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => handlelogout}>
+                        <TouchableOpacity onPress={() => handlelogout()}>
                             <Text style={styles.btn}>
                                 Log Out
                             </Text>
